@@ -12,8 +12,12 @@ linters:
     - gocritic
     - unconvert
     - unparam
-  settings:
-    errcheck: {}
+  exclusions:
+    rules:
+      - text: "Error return value of `tx.Rollback` is not checked"
+        linters: [errcheck]
+      - text: "Error return value of `rows.Close` is not checked"
+        linters: [errcheck]
 
 formatters:
   enable:
@@ -22,12 +26,3 @@ formatters:
     goimports:
       local-prefixes:
         - github.com/billcobbler/golinks
-
-issues:
-  exclude-rules:
-    # tx.Rollback in defer is intentionally unchecked throughout the codebase.
-    - text: "Error return value of `tx.Rollback` is not checked"
-      linters: [errcheck]
-    # rows.Close in defer is intentionally unchecked.
-    - text: "Error return value of `rows.Close` is not checked"
-      linters: [errcheck]
