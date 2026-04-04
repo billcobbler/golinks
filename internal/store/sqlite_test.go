@@ -16,7 +16,7 @@ func newTestStore(t *testing.T) *store.SQLiteStore {
 	if err != nil {
 		t.Fatalf("newTestStore: %v", err)
 	}
-	t.Cleanup(func() { s.Close() })
+	t.Cleanup(func() { _ = s.Close() })
 	return s
 }
 

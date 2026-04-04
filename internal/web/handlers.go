@@ -257,7 +257,7 @@ func (h *Handlers) Import(w http.ResponseWriter, r *http.Request) {
 		h.redirectMsg(w, r, "No file provided")
 		return
 	}
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	data, err := io.ReadAll(io.LimitReader(file, 10<<20))
 	if err != nil {

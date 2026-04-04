@@ -15,9 +15,9 @@ type User struct {
 
 // Session represents an authenticated browser session.
 type Session struct {
-	ID        string    `json:"id"`         // SHA-256(raw_token), hex
+	ID        string    `json:"id"` // SHA-256(raw_token), hex
 	UserID    int64     `json:"user_id"`
-	Username  string    `json:"username"`   // denormalised for fast middleware lookup
+	Username  string    `json:"username"` // denormalised for fast middleware lookup
 	CreatedAt time.Time `json:"created_at"`
 	ExpiresAt time.Time `json:"expires_at"`
 	LastSeen  time.Time `json:"last_seen"`
@@ -27,7 +27,7 @@ type Session struct {
 type APIToken struct {
 	ID        int64      `json:"id"`
 	UserID    int64      `json:"user_id"`
-	TokenHash string     `json:"-"`          // SHA-256(raw); never serialised
+	TokenHash string     `json:"-"` // SHA-256(raw); never serialised
 	Label     string     `json:"label"`
 	CreatedAt time.Time  `json:"created_at"`
 	LastUsed  *time.Time `json:"last_used,omitempty"`

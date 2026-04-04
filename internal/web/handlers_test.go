@@ -19,12 +19,12 @@ func newTestHandlers(t *testing.T) *Handlers {
 	if err != nil {
 		t.Fatalf("NewSQLite: %v", err)
 	}
-	t.Cleanup(func() { s.Close() })
+	t.Cleanup(func() { _ = s.Close() })
 	return NewHandlers(s, nil)
 }
 
 // seedLink inserts a link directly into the store.
-func seedLink(t *testing.T, s store.Store, shortname, targetURL string) *models.Link {
+func seedLink(t *testing.T, s store.Store, shortname, targetURL string) *models.Link { //nolint:unparam
 	t.Helper()
 	link := &models.Link{Shortname: shortname, TargetURL: targetURL, CreatedAt: time.Now(), UpdatedAt: time.Now()}
 	if err := s.CreateLink(link); err != nil {
@@ -92,7 +92,7 @@ func TestHandlers_PartialsLinks_ReturnsRows(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Cleanup(func() { s.Close() })
+	t.Cleanup(func() { _ = s.Close() })
 	seedLink(t, s, "docs", "https://docs.example.com")
 	h := NewHandlers(s, nil)
 
@@ -131,7 +131,7 @@ func TestHandlers_CreateLink_ConflictRedirectsWithError(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Cleanup(func() { s.Close() })
+	t.Cleanup(func() { _ = s.Close() })
 	seedLink(t, s, "docs", "https://docs.example.com")
 	h := NewHandlers(s, nil)
 
@@ -154,7 +154,7 @@ func TestHandlers_UpdateLink_ReturnsRow(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Cleanup(func() { s.Close() })
+	t.Cleanup(func() { _ = s.Close() })
 	seedLink(t, s, "docs", "https://docs.example.com")
 	h := NewHandlers(s, nil)
 
@@ -177,7 +177,7 @@ func TestHandlers_DeleteLink_ReturnsEmpty(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Cleanup(func() { s.Close() })
+	t.Cleanup(func() { _ = s.Close() })
 	seedLink(t, s, "docs", "https://docs.example.com")
 	h := NewHandlers(s, nil)
 
@@ -197,7 +197,7 @@ func TestHandlers_LinkEditRow_ReturnsForm(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Cleanup(func() { s.Close() })
+	t.Cleanup(func() { _ = s.Close() })
 	seedLink(t, s, "docs", "https://docs.example.com")
 	h := NewHandlers(s, nil)
 
@@ -222,7 +222,7 @@ func TestHandlers_NewHandlers_ParsesTemplates(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Cleanup(func() { s.Close() })
+	t.Cleanup(func() { _ = s.Close() })
 	defer func() {
 		if r := recover(); r != nil {
 			t.Errorf("NewHandlers panicked: %v", r)

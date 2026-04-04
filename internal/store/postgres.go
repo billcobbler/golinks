@@ -11,8 +11,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/billcobbler/golinks/internal/models"
 	_ "github.com/jackc/pgx/v5/stdlib"
+
+	"github.com/billcobbler/golinks/internal/models"
 )
 
 //go:embed migrations/001_initial.postgres.sql
@@ -491,8 +492,6 @@ func (s *PostgresStore) ConsumeOAuthState(token string, now time.Time) error {
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-
-type pgScanner interface{ Scan(...any) error }
 
 func scanLinkPG(s *sql.Row) (*models.Link, error) {
 	var l models.Link

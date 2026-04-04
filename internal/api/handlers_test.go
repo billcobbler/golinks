@@ -101,7 +101,7 @@ func TestCreateLink_Validation(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			resp.Body.Close()
+			_ = resp.Body.Close()
 			if resp.StatusCode != tt.wantStatus {
 				t.Errorf("status: got %d want %d", resp.StatusCode, tt.wantStatus)
 			}
@@ -166,7 +166,7 @@ func TestDeleteLink(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 	if resp.StatusCode != http.StatusNoContent {
 		t.Errorf("delete status: got %d want 204", resp.StatusCode)
 	}
@@ -238,7 +238,7 @@ func TestRedirect(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 
 	if resp.StatusCode != http.StatusFound {
 		t.Errorf("redirect status: got %d want 302", resp.StatusCode)
@@ -263,7 +263,7 @@ func TestRedirectPattern(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 
 	if resp.StatusCode != http.StatusFound {
 		t.Errorf("redirect status: got %d want 302", resp.StatusCode)

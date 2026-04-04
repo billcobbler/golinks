@@ -8,8 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/billcobbler/golinks/internal/models"
 	_ "modernc.org/sqlite"
+
+	"github.com/billcobbler/golinks/internal/models"
 )
 
 //go:embed migrations/001_initial.sql
