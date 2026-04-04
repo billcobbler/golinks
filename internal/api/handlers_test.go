@@ -115,7 +115,10 @@ func TestCreateLink_Conflict(t *testing.T) {
 
 	body := `{"shortname":"dup","target_url":"https://example.com"}`
 	http.Post(srv.URL+"/-/api/links", "application/json", bytes.NewBufferString(body)) //nolint
-	resp, _ := http.Post(srv.URL+"/-/api/links", "application/json", bytes.NewBufferString(body))
+	resp, err := http.Post(srv.URL+"/-/api/links", "application/json", bytes.NewBufferString(body))
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusConflict {
 		t.Errorf("expected 409, got %d", resp.StatusCode)
