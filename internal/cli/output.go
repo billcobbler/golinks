@@ -19,8 +19,8 @@ func PrintLinks(w io.Writer, links []*models.Link, jsonMode bool) {
 		return
 	}
 	tw := tabwriter.NewWriter(w, 0, 0, 2, ' ', 0)
-	_ = fmt.Fprintln(tw, "SHORTNAME\tURL\tCLICKS\tDESCRIPTION")
-	_ = fmt.Fprintln(tw, strings.Repeat("-", 9)+"\t"+strings.Repeat("-", 3)+"\t"+strings.Repeat("-", 6)+"\t"+strings.Repeat("-", 11))
+	_, _ = fmt.Fprintln(tw, "SHORTNAME\tURL\tCLICKS\tDESCRIPTION")
+	_, _ = fmt.Fprintln(tw, strings.Repeat("-", 9)+"\t"+strings.Repeat("-", 3)+"\t"+strings.Repeat("-", 6)+"\t"+strings.Repeat("-", 11))
 	for _, l := range links {
 		desc := l.Description
 		if len(desc) > 40 {
@@ -30,7 +30,7 @@ func PrintLinks(w io.Writer, links []*models.Link, jsonMode bool) {
 		if len(target) > 55 {
 			target = target[:52] + "..."
 		}
-		_ = fmt.Fprintf(tw, "%s\t%s\t%d\t%s\n", l.Shortname, target, l.ClickCount, desc)
+		_, _ = fmt.Fprintf(tw, "%s\t%s\t%d\t%s\n", l.Shortname, target, l.ClickCount, desc)
 	}
 	_ = tw.Flush()
 }
