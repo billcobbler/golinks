@@ -43,17 +43,17 @@ func PrintLink(w io.Writer, l *models.Link, jsonMode bool) {
 		_ = enc.Encode(l)
 		return
 	}
-	fmt.Fprintf(w, "Shortname:   %s\n", l.Shortname)
-	fmt.Fprintf(w, "URL:         %s\n", l.TargetURL)
+	_, _ = fmt.Fprintf(w, "Shortname:   %s\n", l.Shortname)
+	_, _ = fmt.Fprintf(w, "URL:         %s\n", l.TargetURL)
 	if l.Description != "" {
-		fmt.Fprintf(w, "Description: %s\n", l.Description)
+		_, _ = fmt.Fprintf(w, "Description: %s\n", l.Description)
 	}
-	fmt.Fprintf(w, "Pattern:     %v\n", l.IsPattern)
-	fmt.Fprintf(w, "Clicks:      %d\n", l.ClickCount)
+	_, _ = fmt.Fprintf(w, "Pattern:     %v\n", l.IsPattern)
+	_, _ = fmt.Fprintf(w, "Clicks:      %d\n", l.ClickCount)
 	if l.LastClicked != nil {
-		fmt.Fprintf(w, "Last click:  %s\n", l.LastClicked.Local().Format("2006-01-02 15:04:05"))
+		_, _ = fmt.Fprintf(w, "Last click:  %s\n", l.LastClicked.Local().Format("2006-01-02 15:04:05"))
 	}
-	fmt.Fprintf(w, "Created:     %s\n", l.CreatedAt.Local().Format("2006-01-02 15:04:05"))
+	_, _ = fmt.Fprintf(w, "Created:     %s\n", l.CreatedAt.Local().Format("2006-01-02 15:04:05"))
 }
 
 // PrintStats writes aggregate statistics to w.
@@ -64,14 +64,14 @@ func PrintStats(w io.Writer, s *models.Stats, jsonMode bool) {
 		_ = enc.Encode(s)
 		return
 	}
-	fmt.Fprintf(w, "Total links:  %d\n", s.TotalLinks)
-	fmt.Fprintf(w, "Total clicks: %d\n", s.TotalClicks)
+	_, _ = fmt.Fprintf(w, "Total links:  %d\n", s.TotalLinks)
+	_, _ = fmt.Fprintf(w, "Total clicks: %d\n", s.TotalClicks)
 	if len(s.TopLinks) > 0 {
-		fmt.Fprintln(w, "\nTop links:")
+		_, _ = fmt.Fprintln(w, "\nTop links:")
 		tw := tabwriter.NewWriter(w, 0, 0, 2, ' ', 0)
 		for _, l := range s.TopLinks {
-			fmt.Fprintf(tw, "  %s\t%d clicks\n", l.Shortname, l.ClickCount)
+			_, _ = fmt.Fprintf(tw, "  %s\t%d clicks\n", l.Shortname, l.ClickCount)
 		}
-		tw.Flush()
+		_ = tw.Flush()
 	}
 }

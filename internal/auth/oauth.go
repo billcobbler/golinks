@@ -70,7 +70,7 @@ func (p *OAuthProvider) FetchUserInfo(ctx context.Context, accessToken string) (
 	if err != nil {
 		return nil, fmt.Errorf("fetch userinfo: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	body, err := io.ReadAll(io.LimitReader(resp.Body, 32*1024))
 	if err != nil {

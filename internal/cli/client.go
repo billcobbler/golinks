@@ -202,7 +202,7 @@ func (c *Client) Import(data []byte, contentType string, overwrite bool) (string
 	if err != nil {
 		return "", err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	var result struct {
 		Message string `json:"message"`
 		Error   string `json:"error"`
