@@ -5,13 +5,14 @@ import (
 	"log/slog"
 	"net/http"
 
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
+
 	"github.com/billcobbler/golinks/internal/auth"
 	"github.com/billcobbler/golinks/internal/config"
 	"github.com/billcobbler/golinks/internal/redirect"
 	"github.com/billcobbler/golinks/internal/store"
 	"github.com/billcobbler/golinks/internal/web"
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
 )
 
 // NewRouter builds and returns the root chi router.

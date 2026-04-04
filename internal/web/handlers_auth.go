@@ -12,11 +12,12 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/go-chi/chi/v5"
+
 	"github.com/billcobbler/golinks/internal/auth"
 	"github.com/billcobbler/golinks/internal/config"
 	"github.com/billcobbler/golinks/internal/models"
 	"github.com/billcobbler/golinks/internal/store"
-	"github.com/go-chi/chi/v5"
 )
 
 // ─── AuthHandlers ─────────────────────────────────────────────────────────────
