@@ -38,7 +38,7 @@ func main() {
 		log.Error("failed to open database", "path", cfg.DBPath, "err", err)
 		os.Exit(1)
 	}
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 
 	log.Info("database opened", "path", cfg.DBPath)
 

@@ -52,7 +52,7 @@ func (c *Client) do(method, path string, body any) (*http.Response, error) {
 }
 
 func decodeJSON[T any](resp *http.Response) (T, error) {
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	var zero T
 	if resp.StatusCode >= 400 {
 		var e struct{ Error string }
@@ -141,7 +141,7 @@ func (c *Client) DeleteLink(shortname string) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	if resp.StatusCode >= 400 {
 		var e struct{ Error string }
 		_ = json.NewDecoder(resp.Body).Decode(&e)
@@ -172,7 +172,7 @@ func (c *Client) Export(format string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	if resp.StatusCode >= 400 {
 		var e struct{ Error string }
 		_ = json.NewDecoder(resp.Body).Decode(&e)

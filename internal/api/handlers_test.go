@@ -71,7 +71,7 @@ func TestCreateAndListLinks(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer resp2.Body.Close()
+	defer func() { _ = resp2.Body.Close() }()
 
 	var result models.ListResult
 	_ = json.NewDecoder(resp2.Body).Decode(&result)
@@ -173,7 +173,7 @@ func TestDeleteLink(t *testing.T) {
 
 	// Confirm it's gone.
 	resp2, _ := http.Get(srv.URL + "/-/api/links/del")
-	resp2.Body.Close()
+	_ = resp2.Body.Close()
 	if resp2.StatusCode != http.StatusNotFound {
 		t.Errorf("expected 404 after delete, got %d", resp2.StatusCode)
 	}
