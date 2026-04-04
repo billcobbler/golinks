@@ -7,14 +7,19 @@ linters:
     - errcheck
     - govet
     - staticcheck
-    - goimports
     - gocritic
     - unconvert
     - unparam
+  settings:
+    errcheck: {}
 
-linters-settings:
-  goimports:
-    local-prefixes: github.com/billcobbler/golinks
+formatters:
+  enable:
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/billcobbler/golinks
 
 issues:
   exclude-rules:
