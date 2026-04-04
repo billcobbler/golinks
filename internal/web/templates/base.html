@@ -1,0 +1,40 @@
+{{define "base"}}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{block "title" .}}Golinks{{end}}</title>
+  <link rel="stylesheet" href="/-/static/pico.min.css">
+  <link rel="stylesheet" href="/-/static/app.css">
+  <script src="/-/static/htmx.min.js" defer></script>
+</head>
+<body>
+  <header class="container-fluid">
+    <nav>
+      <ul>
+        <li><a href="/-/links"><strong>go/</strong></a></li>
+      </ul>
+      <ul>
+        <li><a href="/-/links"{{if eq .Page "links"}} aria-current="page"{{end}}>Links</a></li>
+        <li><a href="/-/analytics"{{if eq .Page "analytics"}} aria-current="page"{{end}}>Analytics</a></li>
+        {{if .Username}}
+        <li><a href="/-/settings"{{if eq .Page "settings"}} aria-current="page"{{end}}>Settings</a></li>
+        <li>
+          <form method="POST" action="/-/auth/logout" style="margin:0">
+            <button type="submit" class="secondary outline" style="padding:2px 10px;font-size:13px">
+              Logout ({{.Username}})
+            </button>
+          </form>
+        </li>
+        {{end}}
+      </ul>
+    </nav>
+  </header>
+  <main class="container">
+    {{block "content" .}}{{end}}
+  </main>
+  <footer class="container-fluid">
+    <small>golinks</small>
+  </footer>
+</body>
+</html>{{end}}

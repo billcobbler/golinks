@@ -1,0 +1,88 @@
+/* app.css — golinks dashboard custom styles */
+
+/* ── Nav ── */
+header nav a[aria-current="page"] {
+  font-weight: 700;
+}
+
+/* ── Top bar (search + actions) ── */
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.top-bar input[type="search"] {
+  flex: 1;
+  max-width: 28rem;
+  margin: 0;
+}
+.top-bar-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.top-bar-actions a[role="button"],
+.top-bar-actions button {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ── Table ── */
+figure {
+  overflow-x: auto;
+}
+table :is(th, td) {
+  padding: 0.5rem 0.75rem;
+  vertical-align: middle;
+}
+table sup {
+  color: var(--pico-muted-color);
+  font-size: 0.7rem;
+}
+
+/* ── Row action buttons ── */
+.row-actions {
+  white-space: nowrap;
+}
+.row-actions button {
+  --pico-font-size: 0.8rem;
+  padding: 0.2rem 0.55rem;
+  margin: 0 0.2rem 0 0;
+}
+
+/* ── Inline edit row ── */
+tr.editing td {
+  background: var(--pico-card-background-color);
+}
+tr.editing input[type="text"],
+tr.editing input[type="url"],
+tr.editing select {
+  margin: 0;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* ── Flash message ── */
+article.flash {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background: var(--pico-ins-color, #d1fae5);
+  border-left: 3px solid var(--pico-primary);
+}
+
+/* ── Dialog ── */
+dialog article header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+dialog article header h3 {
+  margin: 0;
+}
+dialog article header button[rel="prev"] {
+  --pico-font-size: 1rem;
+  padding: 0.3rem 0.6rem;
+  margin: 0;
+}

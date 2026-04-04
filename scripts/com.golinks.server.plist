@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  macOS LaunchAgent for golinks-server.
+  Install:
+    cp com.golinks.server.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.golinks.server.plist
+  Uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.golinks.server.plist
+    rm ~/Library/LaunchAgents/com.golinks.server.plist
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.golinks.server</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/bin/golinks-server</string>
+  </array>
+
+  <!-- Environment variables — edit as needed -->
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>GOLINKS_DB</key>
+    <string>/usr/local/var/golinks/golinks.db</string>
+    <key>GOLINKS_PORT</key>
+    <string>8080</string>
+    <key>GOLINKS_LOG_LEVEL</key>
+    <string>info</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>~/Library/Logs/golinks/server.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>~/Library/Logs/golinks/server-error.log</string>
+</dict>
+</plist>

@@ -1,0 +1,42 @@
+{{define "title"}}Golinks — Sign In{{end}}
+{{define "content"}}
+<article style="max-width:400px;margin:80px auto">
+  <header><h2>Sign in to Golinks</h2></header>
+
+  {{if .SetupNeeded}}
+  <p>
+    No accounts exist yet.
+    <a href="/-/auth/setup">Create the first account →</a>
+  </p>
+  {{else}}
+
+  {{if .Error}}
+  <p role="alert" style="color:var(--pico-color-red-500)">{{.Error}}</p>
+  {{end}}
+
+  {{if .HasLocal}}
+  <form method="POST" action="/-/auth/login">
+    <label for="username">Username
+      <input id="username" name="username" type="text" autocomplete="username"
+             placeholder="your-username" required autofocus>
+    </label>
+    <label for="password">Password
+      <input id="password" name="password" type="password" autocomplete="current-password"
+             placeholder="••••••••" required>
+    </label>
+    <button type="submit">Sign in</button>
+  </form>
+  {{end}}
+
+  {{if and .HasLocal .HasOAuth}}<hr>{{end}}
+
+  {{if .HasOAuth}}
+  <a href="/-/auth/login/oauth" role="button" class="secondary" style="display:block;text-align:center">
+    {{.OAuthLabel}}
+  </a>
+  {{end}}
+
+  {{end}}{{/* end SetupNeeded else */}}
+</article>
+{{end}}
+{{template "base" .}}

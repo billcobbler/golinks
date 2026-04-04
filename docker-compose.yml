@@ -1,0 +1,29 @@
+services:
+  golinks:
+    build: .
+    container_name: golinks
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - golinks-data:/data
+    environment:
+      GOLINKS_PORT: "8080"
+      GOLINKS_DB: /data/golinks.db
+      GOLINKS_AUTH: "none"            # Change to: local | oauth | local+oauth
+      GOLINKS_LOG_LEVEL: "info"
+      GOLINKS_ANALYTICS_RETENTION: "0"  # 0 = keep forever; set to e.g. 90 for 90 days
+      # GOLINKS_BASE_URL: "http://go"
+      # GOLINKS_OAUTH_PROVIDER: "google"
+      # GOLINKS_OAUTH_CLIENT_ID: "..."
+      # GOLINKS_OAUTH_CLIENT_SECRET: "..."
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/-/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+volumes:
+  golinks-data:
+    driver: local

@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Golinks",
+  "version": "1.0.0",
+  "description": "Navigate go/ shortlinks and manage your golinks server from any browser.",
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "http://go/*",
+    "http://go:*/*",
+    "<all_urls>"
+  ],
+
+  "background": {
+    "service_worker": "background/service_worker.js"
+  },
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Golinks — add or navigate links"
+  },
+
+  "omnibox": {
+    "keyword": "go/"
+  },
+
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+
+  "icons": {
+    "16":  "icons/icon16.png",
+    "48":  "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "golinks@golinks.io",
+      "strict_min_version": "109.0"
+    }
+  }
+}

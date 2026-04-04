@@ -1,0 +1,99 @@
+{{define "title"}}Links — Golinks{{end}}
+{{define "content"}}
+<div class="top-bar">
+  <input type="search" name="q" placeholder="Search links…"
+         value="{{.Search}}"
+         hx-get="/-/partials/links"
+         hx-trigger="keyup changed delay:300ms, search"
+         hx-target="#links-tbody"
+         hx-include="[name='q']"
+         aria-label="Search links">
+  <div class="top-bar-actions">
+    <button onclick="document.getElementById('add-dialog').showModal()">+ Add link</button>
+    <a href="/-/api/export?format=csv" role="button" class="outline secondary">Export CSV</a>
+    <button class="outline secondary" onclick="document.getElementById('import-dialog').showModal()">Import</button>
+  </div>
+</div>
+
+{{if .Message}}
+<article id="flash-msg" class="flash">{{.Message}}</article>
+{{end}}
+
+<figure>
+  <table>
+    <thead>
+      <tr>
+        <th>Shortname</th>
+        <th>Target URL</th>
+        <th>Description</th>
+        <th>Clicks</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="links-tbody">
+      {{template "links_rows" .}}
+    </tbody>
+  </table>
+</figure>
+
+{{if gt .Total .PageSize}}
+<p><small>Showing {{.PageSize}} of {{.Total}} links.</small></p>
+{{end}}
+
+<!-- Add link dialog -->
+<dialog id="add-dialog">
+  <article>
+    <header>
+      <button aria-label="Close" rel="prev" onclick="document.getElementById('add-dialog').close()"></button>
+      <h3>Add link</h3>
+    </header>
+    <form action="/-/links" method="post" autocomplete="off">
+      <label>
+        Shortname
+        <input type="text" name="shortname" placeholder="docs" required autofocus>
+        <small>Will be accessible at <code>go/&lt;shortname&gt;</code></small>
+      </label>
+      <label>
+        Target URL
+        <input type="url" name="target_url" placeholder="https://docs.example.com" required>
+      </label>
+      <label>
+        Description
+        <input type="text" name="description" placeholder="Optional description">
+      </label>
+      <label>
+        <input type="checkbox" name="is_pattern" value="true">
+        Pattern link <small>({*}, {1}, {2} substitution in URL)</small>
+      </label>
+      <footer>
+        <button type="button" class="secondary" onclick="document.getElementById('add-dialog').close()">Cancel</button>
+        <button type="submit">Add link</button>
+      </footer>
+    </form>
+  </article>
+</dialog>
+
+<!-- Import dialog -->
+<dialog id="import-dialog">
+  <article>
+    <header>
+      <button aria-label="Close" rel="prev" onclick="document.getElementById('import-dialog').close()"></button>
+      <h3>Import links</h3>
+    </header>
+    <form action="/-/import" method="post" enctype="multipart/form-data">
+      <label>
+        File <small>(JSON array or CSV)</small>
+        <input type="file" name="file" accept=".json,.csv" required>
+      </label>
+      <label>
+        <input type="checkbox" name="overwrite" value="true">
+        Overwrite existing links with same shortname
+      </label>
+      <footer>
+        <button type="button" class="secondary" onclick="document.getElementById('import-dialog').close()">Cancel</button>
+        <button type="submit">Import</button>
+      </footer>
+    </form>
+  </article>
+</dialog>
+{{end}}

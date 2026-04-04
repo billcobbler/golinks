@@ -1,0 +1,10 @@
+{{define "links_rows"}}
+{{- range .Links}}{{template "link_row" .}}{{end -}}
+{{- if not .Links}}
+<tr>
+  <td colspan="5" style="text-align:center;color:var(--pico-muted-color);padding:2rem">
+    No links found. Add one above!
+  </td>
+</tr>
+{{- end}}
+{{end}}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golinks — Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1><span class="brand">go/</span> Settings</h1>
+    </header>
+
+    <form id="options-form">
+      <section>
+        <h2>Server</h2>
+
+        <label for="server-url">
+          Server URL
+          <small>Base URL of your golinks server</small>
+          <input id="server-url" type="url" placeholder="http://localhost:8080" required>
+        </label>
+
+        <label for="token">
+          API Token <span class="optional">(optional)</span>
+          <small>Only required if your server has authentication enabled</small>
+          <input id="token" type="password" placeholder="Leave blank for no-auth mode"
+                 autocomplete="current-password">
+        </label>
+      </section>
+
+      <div class="actions">
+        <button type="submit" id="save-btn">Save settings</button>
+        <button type="button" id="test-btn" class="secondary">Test connection</button>
+      </div>
+
+      <div id="status" hidden></div>
+    </form>
+
+    <section class="info">
+      <h2>How to use</h2>
+      <dl>
+        <dt>Omnibox</dt>
+        <dd>Type <kbd>go</kbd> then <kbd>Space</kbd> in the address bar, then a shortname.</dd>
+
+        <dt>Bare navigation</dt>
+        <dd>Type <code>http://go/shortname</code> directly — the extension redirects it to your server.</dd>
+
+        <dt>Popup</dt>
+        <dd>Click the extension icon to add the current page as a golink.</dd>
+      </dl>
+    </section>
+  </main>
+
+  <script src="options.js"></script>
+</body>
+</html>

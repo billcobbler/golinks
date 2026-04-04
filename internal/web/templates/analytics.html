@@ -1,0 +1,67 @@
+{{define "title"}}Analytics — Golinks{{end}}
+{{define "content"}}
+<h2>Analytics</h2>
+
+<div class="grid">
+  <article style="text-align:center">
+    <hgroup>
+      <h2>{{.Stats.TotalLinks}}</h2>
+      <p>Total links</p>
+    </hgroup>
+  </article>
+  <article style="text-align:center">
+    <hgroup>
+      <h2>{{.Stats.TotalClicks}}</h2>
+      <p>Total clicks</p>
+    </hgroup>
+  </article>
+</div>
+
+<h3>Top links by clicks</h3>
+<figure>
+  <table>
+    <thead>
+      <tr>
+        <th>Shortname</th>
+        <th>Target URL</th>
+        <th>Clicks</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .Stats.TopLinks}}
+      <tr>
+        <td><a href="/{{.Shortname}}">{{.Shortname}}</a>{{if .IsPattern}} <sup title="pattern link">*</sup>{{end}}</td>
+        <td><a href="{{.TargetURL}}" target="_blank" rel="noopener">{{truncate .TargetURL 65}}</a></td>
+        <td>{{.ClickCount}}</td>
+      </tr>
+      {{end}}
+      {{if not .Stats.TopLinks}}
+      <tr>
+        <td colspan="3" style="text-align:center;color:var(--pico-muted-color);padding:2rem">
+          No clicks recorded yet. Links appear here once they are visited.
+        </td>
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+</figure>
+
+{{if .Stats.RecentClicks}}
+<h3>Recent activity</h3>
+<figure>
+  <table>
+    <thead>
+      <tr><th>Shortname</th><th>Time</th></tr>
+    </thead>
+    <tbody>
+      {{range .Stats.RecentClicks}}
+      <tr>
+        <td><a href="/{{.Shortname}}">{{.Shortname}}</a></td>
+        <td><small>{{.ClickedAt.Format "2006-01-02 15:04:05"}}</small></td>
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+</figure>
+{{end}}
+{{end}}

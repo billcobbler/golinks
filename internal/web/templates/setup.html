@@ -1,0 +1,30 @@
+{{define "title"}}Golinks — Initial Setup{{end}}
+{{define "content"}}
+<article style="max-width:420px;margin:80px auto">
+  <header>
+    <h2>Create Admin Account</h2>
+    <p>No accounts exist yet. Create the first account to get started.</p>
+  </header>
+
+  {{if .Error}}
+  <p role="alert" style="color:var(--pico-color-red-500)">{{.Error}}</p>
+  {{end}}
+
+  <form method="POST" action="/-/auth/setup">
+    <label for="username">Username
+      <input id="username" name="username" type="text" autocomplete="username"
+             placeholder="admin" required autofocus>
+    </label>
+    <label for="password">Password
+      <input id="password" name="password" type="password" autocomplete="new-password"
+             placeholder="Choose a strong password" required>
+    </label>
+    <label for="confirm">Confirm password
+      <input id="confirm" name="confirm" type="password" autocomplete="new-password"
+             placeholder="Repeat password" required>
+    </label>
+    <button type="submit">Create account</button>
+  </form>
+</article>
+{{end}}
+{{template "base" .}}

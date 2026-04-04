@@ -1,0 +1,6 @@
+bin/
+dist/
+*.db
+extension/icons/node_modules/
+extension/icons/package.json
+extension/icons/package-lock.json

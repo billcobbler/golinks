@@ -1,0 +1,28 @@
+{{define "link_edit_row"}}
+<tr id="row-{{.ID}}" class="editing">
+  <td><strong>{{.Shortname}}</strong></td>
+  <td>
+    <input type="url" name="target_url" value="{{.TargetURL}}" required aria-label="Target URL">
+  </td>
+  <td>
+    <input type="text" name="description" value="{{.Description}}" aria-label="Description">
+  </td>
+  <td>
+    <select name="is_pattern" aria-label="Link type">
+      <option value="false"{{if not .IsPattern}} selected{{end}}>Regular</option>
+      <option value="true"{{if .IsPattern}} selected{{end}}>Pattern</option>
+    </select>
+  </td>
+  <td class="row-actions">
+    <button class="outline"
+            hx-put="/-/links/update?name={{.Shortname}}"
+            hx-target="closest tr"
+            hx-swap="outerHTML"
+            hx-include="closest tr">Save</button>
+    <button class="outline secondary"
+            hx-get="/-/links/row?name={{.Shortname}}"
+            hx-target="closest tr"
+            hx-swap="outerHTML">Cancel</button>
+  </td>
+</tr>
+{{end}}

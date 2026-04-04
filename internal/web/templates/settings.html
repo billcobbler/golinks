@@ -1,0 +1,52 @@
+{{define "title"}}Golinks — Settings{{end}}
+{{define "content"}}
+<h1>Settings</h1>
+
+{{if .Message}}<p role="alert">{{.Message}}</p>{{end}}
+
+{{if .NewToken}}
+<article style="background:var(--pico-color-green-50);border:1px solid var(--pico-color-green-200);padding:12px 16px">
+  <strong>New API token created.</strong>
+  Copy it now — it will not be shown again.<br>
+  <code style="word-break:break-all;display:block;margin-top:8px;padding:8px;background:#fff">{{.NewToken}}</code>
+</article>
+{{end}}
+
+<section>
+  <h2>API Tokens</h2>
+  <p>Use these tokens with the <code>golinks</code> CLI (<code>golinks config set token &lt;token&gt;</code>) or the browser extension.</p>
+
+  <form method="POST" action="/-/settings/tokens" style="display:flex;gap:8px;align-items:flex-end;margin-bottom:16px">
+    <label style="flex:1;margin:0">
+      Label <small>(optional)</small>
+      <input type="text" name="label" placeholder="e.g. laptop CLI">
+    </label>
+    <button type="submit" style="margin:0">Generate token</button>
+  </form>
+
+  {{if .Tokens}}
+  <table>
+    <thead>
+      <tr><th>Label</th><th>Created</th><th>Last used</th><th></th></tr>
+    </thead>
+    <tbody>
+      {{range .Tokens}}
+      <tr>
+        <td>{{if .Label}}{{.Label}}{{else}}<em>unlabelled</em>{{end}}</td>
+        <td>{{.CreatedAt.Format "2006-01-02"}}</td>
+        <td>{{if .LastUsed}}{{.LastUsed.Format "2006-01-02"}}{{else}}never{{end}}</td>
+        <td>
+          <form method="POST" action="/-/settings/tokens/{{.ID}}/delete" style="margin:0">
+            <button type="submit" class="secondary outline" style="padding:2px 10px;font-size:12px">Revoke</button>
+          </form>
+        </td>
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+  {{else}}
+  <p><em>No tokens yet.</em></p>
+  {{end}}
+</section>
+{{end}}
+{{template "base" .}}

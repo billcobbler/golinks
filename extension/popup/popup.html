@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golinks</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <span class="brand">go/</span>
+    <nav>
+      <a id="open-dashboard" href="#" title="Open dashboard">Dashboard ↗</a>
+      <a id="open-options" href="#" title="Extension settings">⚙</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Badge shown when the current page already has a golink -->
+    <div id="existing-badge" class="badge" hidden>
+      This page is saved as <strong id="existing-name"></strong>
+    </div>
+
+    <form id="add-form" autocomplete="off">
+      <label for="shortname">Shortname</label>
+      <input id="shortname" type="text" placeholder="docs" required
+             pattern="[^-\s][^\s]*" title="Cannot start with '-' or contain spaces">
+
+      <label for="url">Target URL</label>
+      <input id="url" type="url" placeholder="https://…" required>
+
+      <label for="description">Description <span class="optional">(optional)</span></label>
+      <input id="description" type="text" placeholder="What is this link?">
+
+      <label class="checkbox-label">
+        <input id="is-pattern" type="checkbox">
+        Pattern link <span class="hint">({*}, {1}, {2} substitution)</span>
+      </label>
+
+      <button type="submit" id="submit-btn">Add link</button>
+    </form>
+
+    <div id="status" hidden></div>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>

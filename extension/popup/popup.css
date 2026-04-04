@@ -1,0 +1,111 @@
+/* Golinks popup styles */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  width: 320px;
+  margin: 0;
+  background: #fff;
+  color: #1a1a1a;
+}
+
+/* ── Header ── */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+.brand {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2563eb;
+  letter-spacing: -0.5px;
+}
+nav {
+  display: flex;
+  gap: 10px;
+}
+nav a {
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 12px;
+}
+nav a:hover { color: #2563eb; }
+
+/* ── Main ── */
+main { padding: 12px; }
+
+/* ── Existing badge ── */
+.badge {
+  font-size: 12px;
+  color: #166534;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+}
+
+/* ── Form ── */
+form { display: flex; flex-direction: column; gap: 8px; }
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-weight: 500;
+  color: #374151;
+}
+.optional { font-weight: 400; color: #9ca3af; }
+.hint      { font-weight: 400; color: #9ca3af; font-size: 11px; }
+
+.checkbox-label {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+}
+.checkbox-label input { margin: 0; }
+
+input[type="text"],
+input[type="url"] {
+  padding: 6px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+input:focus { border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.15); }
+input:invalid:not(:placeholder-shown) { border-color: #ef4444; }
+
+button[type="submit"] {
+  margin-top: 4px;
+  padding: 7px 12px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+button[type="submit"]:hover:not(:disabled) { background: #1d4ed8; }
+button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Status ── */
+#status {
+  margin-top: 8px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+#status.success { background: #dcfce7; color: #166534; }
+#status.error   { background: #fee2e2; color: #991b1b; }

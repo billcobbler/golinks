@@ -1,0 +1,27 @@
+[Unit]
+Description=Golinks — self-hosted short-link redirect server
+Documentation=https://github.com/billcobbler/golinks
+After=network.target
+
+[Service]
+Type=simple
+User=golinks
+Group=golinks
+
+# All GOLINKS_* environment variables live in this file.
+# Create it with: sudo install -m 600 -o golinks /dev/null /etc/golinks/env
+# Then add: GOLINKS_DB=/var/lib/golinks/golinks.db
+EnvironmentFile=/etc/golinks/env
+
+ExecStart=/usr/local/bin/golinks-server
+Restart=always
+RestartSec=5
+
+# Harden the process
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/golinks
+
+[Install]
+WantedBy=multi-user.target
