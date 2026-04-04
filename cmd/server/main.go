@@ -78,7 +78,7 @@ func main() {
 		log.Error("graceful shutdown failed", "err", err)
 	}
 
-	log.Info("goodbye")
+	log.Info("shutdown complete")
 }
 
 // newLogger builds a structured slog.Logger for the given level string.
