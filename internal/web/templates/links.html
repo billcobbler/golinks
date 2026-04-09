@@ -63,7 +63,10 @@
       </label>
       <label>
         <input type="checkbox" name="is_pattern" value="true">
-        Pattern link <small>({*}, {1}, {2} substitution in URL)</small>
+        <span>
+          Pattern link
+          <small>Use <code>{*}</code> to capture the full remainder, or <code>{1}</code>, <code>{2}</code> etc for numbered segments. For example: <code>go/jira/*</code> → <code>https://jira.example.com/browse/{*}</code></small>
+        </span>
       </label>
       <footer>
         <button type="button" class="secondary" onclick="document.getElementById('add-dialog').close()">Cancel</button>

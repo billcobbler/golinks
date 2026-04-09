@@ -86,3 +86,7 @@ dialog article header button[rel="prev"] {
   padding: 0.3rem 0.6rem;
   margin: 0;
 }
+label:has(input[type="checkbox"]) small {
+  display: block;
+  color: var(--pico-muted-color);
+}
