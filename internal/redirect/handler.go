@@ -5,6 +5,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"net/http"
+	"net/url"
 	"strings"
 
 	"github.com/billcobbler/golinks/internal/store"
@@ -32,7 +33,8 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	link, remaining, err := h.store.GetLinkByPath(path)
 	if err != nil {
 		if store.IsNotFound(err) {
-			http.NotFound(w, r)
+			msg := url.QueryEscape("/" + path + " doesn't exist")
+			http.Redirect(w, r, "/-/links?msg="+msg, http.StatusFound)
 			return
 		}
 		http.Error(w, "internal server error", http.StatusInternalServerError)
