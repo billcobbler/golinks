@@ -162,11 +162,14 @@ jobs:
           repository: billcobbler/homebrew-golinks
           token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
           path: homebrew-golinks
+          ref: main
 
       - name: Update formulas
         run: |
           VERSION="${{ github.ref_name }}"
           VERSION="${VERSION#v}"
+
+          mkdir -p homebrew-golinks/Formula
 
           sed \
             -e "s/GOLINKS_VERSION/${VERSION}/g" \
