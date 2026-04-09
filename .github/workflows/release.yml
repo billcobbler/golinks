@@ -230,6 +230,7 @@ jobs:
         with:
           path: dist
           merge-multiple: true
+          pattern: '{binaries,checksums}-*'
 
       - name: Merge checksums
         run: cat dist/checksums*.txt > checksums.txt 2>/dev/null || touch checksums.txt
