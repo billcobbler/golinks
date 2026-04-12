@@ -28,7 +28,13 @@ class GolinksServer < Formula
   end
 
   def install
-    bin.install "golinks-server"
+    # The binary in the archive has OS/arch suffix, rename it when installing
+    binary_name = if OS.mac?
+                    Hardware::CPU.arm? ? "golinks-server-darwin-arm64" : "golinks-server-darwin-amd64"
+                  else
+                    Hardware::CPU.arm? ? "golinks-server-linux-arm64" : "golinks-server-linux-amd64"
+                  end
+    bin.install binary_name => "golinks-server"
     (var/"golinks").mkpath
   end
 
