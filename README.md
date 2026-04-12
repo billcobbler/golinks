@@ -45,7 +45,7 @@ docker compose up -d
 ### Option C: Homebrew (macOS / Linux)
 
 ```bash
-brew tap golinks/tap
+brew tap brew tap billcobbler/homebrew-golinks
 brew install golinks-server   # server binary + brew services integration
 brew install golinks           # CLI tool
 brew services start golinks-server
